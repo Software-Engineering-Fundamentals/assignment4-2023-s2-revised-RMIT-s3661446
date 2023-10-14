@@ -87,6 +87,14 @@ public class IssueBook {
     }
 
 
+    //Tests that the book is updated
+    @Test
+    public void testBookUpdate(){
+        lc.issueBook(newBook, todaysDate);
+        assertFalse(newBook.getStatus());
+    }
+
+
     //Book in low deman is issued for 15 days.
     @Test
     public void testLowDemand(){
@@ -102,6 +110,9 @@ public class IssueBook {
         lc.issueBook(newBook, todaysDate);
         assertEquals(newBook.days(), 3);
     }
+
+
+
 
 
 

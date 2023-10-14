@@ -121,6 +121,7 @@ public class LibraryCard {
                 else{
                     book.setDays(15);
                 }
+                book.setDemand(false);
                 borrowed.add(book);
                 isTaken = true;
             }
