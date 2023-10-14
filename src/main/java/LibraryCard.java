@@ -43,8 +43,8 @@ public class LibraryCard {
     public LibraryCard(Student student, Date IssueDate, Date ExpiryDate, int ID) {
         this.student = student;
         this.IssueDate = IssueDate;
-	   this.ExpiryDate = ExpiryDate;
-	   this.ID = ID;
+	    this.ExpiryDate = ExpiryDate;
+	    this.ID = ID;
     }
 
 
@@ -94,8 +94,44 @@ public class LibraryCard {
      * @return true if the book is successfully borrowed, false otherwise
      */
 
-    public boolean issueBook(Book book){
-    	return false;
+    public boolean issueBook(Book book, Date todayDate){
+        boolean isTaken;
+
+        try{
+            if(borrowed.contains(book)){
+                throw new IllegalBookIssueException ("Book already loaned out");
+            }
+
+            else if(borrowed.size() >= 4 ||
+                    todayDate.compareTo(ExpiryDate) >= 0 ||
+                    !book.getStatus() ||
+                    fine > 0
+
+            
+            ){
+                isTaken = false;
+            }
+
+            
+            else{
+                book.setDemand(false);
+                if (book.getDemand() > 0){
+                    book.setDays(3);
+                }
+                else{
+                    book.setDays(15);
+                }
+                borrowed.add(book);
+                isTaken = true;
+            }
+        }
+        catch (IllegalBookIssueException e){
+            System.err.println(e.getMessage());
+            isTaken = false;
+        }
+
+        return isTaken;
+
    
     }
 
