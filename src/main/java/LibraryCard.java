@@ -98,36 +98,36 @@ public class LibraryCard {
         boolean isTaken;
 
         try{
-            if(borrowed.contains(book)){
+            if(borrowed.contains(book)){                        //Checks that book is already borrowed and throws exception if book is already taken. See catch for exception handling
                 throw new IllegalBookIssueException ("Book already loaned out");
             }
 
-            else if(borrowed.size() >= 4 ||
-                    todayDate.compareTo(ExpiryDate) >= 0 ||
-                    !book.getStatus() ||
-                    fine > 0
+            //State checks
+            else if(borrowed.size() >= 4 ||                     //Checks that there is no more than 4 books
+                    todayDate.compareTo(ExpiryDate) >= 0 ||     //Checks that the card is not expired
+                    !book.getStatus() ||                        //Checks that the book is available
+                    fine > 0                                    //Checks that there is no outstanding fines
 
             
             ){
-                isTaken = false;
+                isTaken = false;                                //If checks fail, book is not borrowed
             }
 
             
             else{
-                book.setDemand(false);
-                if (book.getDemand() > 0){
-                    book.setDays(3);
+                book.setDemand(false);                  //Marks book as unavailable (Will not be used in instances where there are multiple copies of the book)
+                if (book.getDemand() > 0){                     
+                    book.setDays(3);                      //If book is in high demand, loands out for 3 days
                 }
                 else{
-                    book.setDays(15);
-                }
-                book.setDemand(false);
-                borrowed.add(book);
+                    book.setDays(15);                     //If book is not in a high deman, loans book out for 15 days
+                }                  
+                borrowed.add(book);                            //Adds book to the borowwed list
                 isTaken = true;
             }
         }
-        catch (IllegalBookIssueException e){
-            System.err.println(e.getMessage());
+        catch (IllegalBookIssueException e){                    //Handles Book issue exception
+            System.err.println(e.getMessage());                 //Shows the error message
             isTaken = false;
         }
 

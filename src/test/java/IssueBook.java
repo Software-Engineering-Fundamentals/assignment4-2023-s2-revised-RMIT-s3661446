@@ -48,6 +48,7 @@ public class IssueBook {
     @Test
     public void testAlreadyBorrowed(){
         lc.issueBook(newBook, todaysDate);
+        newBook.setDemand(true);                        //Sets the book as available, as the b
         assertFalse(lc.issueBook(newBook, todaysDate));
     }
 	
