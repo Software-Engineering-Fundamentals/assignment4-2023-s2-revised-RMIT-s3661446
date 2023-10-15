@@ -127,7 +127,7 @@ public class LibraryCard {
             }
         }
         catch (IllegalBookIssueException e){                    //Handles Book issue exception
-            System.err.println(e.getMessage());                 //Shows the error message
+            System.err.print(e.getMessage());                 //Shows the error message
             isTaken = false;
         }
 
