@@ -43,7 +43,7 @@ public class IssueBook {
 
     //Baseline test. Should always succeed.
     @Test
-    public void successfullyLoaned(){
+    public void isseBook_True_AllVariablesAreInOrder(){
         assertTrue(lc.issueBook(newBook, todaysDate));
     }
 
@@ -51,7 +51,7 @@ public class IssueBook {
 
     //The book is issue twice. Should throw error
     @Test
-    public void testAlreadyBorrowed(){
+    public void issueBook_Equals_BookAlreadyOnTheAccount(){
         lc.issueBook(newBook, todaysDate);
         //newBook.setDemand(true);
         lc.issueBook(newBook, todaysDate);                        //Sets the book as available, as the b
@@ -60,7 +60,7 @@ public class IssueBook {
 	
     //Adds 4 dummy books. Should return false
     @Test
-    public void manyBooksBorrowed(){
+    public void issueBook_False_ManyBooksBorrowed(){
         lc.issueBook(new Book(2, "New Book", 0), todaysDate);
         lc.issueBook(new Book(3, "New Book", 0), todaysDate);
         lc.issueBook(new Book(4, "New Book", 0), todaysDate);
@@ -73,7 +73,7 @@ public class IssueBook {
     
 //Sets the date to be 1 year after expiry/ Should return false
     @Test
-    public void testExpired(){
+    public void issueBook_False_CardExpired(){
         todaysDate = new Date(2025, 10, 10);
         assertFalse(lc.issueBook(newBook, todaysDate));
     }
@@ -81,14 +81,14 @@ public class IssueBook {
 
     //Sets book as not available. Should return false
     @Test 
-    public void testNotAvailable(){
+    public void IssueBook_False_BookNotAvailable(){
         newBook.setDemand(false);
         assertFalse(lc.issueBook(newBook, todaysDate));
     }
 
     //Issues a fine. Should return false
     @Test
-    public void testFine(){
+    public void IssueBook_False_StudentHasFine(){
         lc.setFine(10);
         assertFalse(lc.issueBook(newBook, todaysDate));
     }
@@ -96,7 +96,7 @@ public class IssueBook {
 
     //Tests that the book is updated
     @Test
-    public void testBookUpdate(){
+    public void Book_False_SuccessfullyBorrowed(){
         lc.issueBook(newBook, todaysDate);
         assertFalse(newBook.getStatus());
     }
@@ -104,7 +104,7 @@ public class IssueBook {
 
     //Book in low deman is issued for 15 days.
     @Test
-    public void testLowDemand(){
+    public void IssueBook_Equals_LowDemand(){
         lc.issueBook(newBook, todaysDate);
         assertEquals(newBook.days(), 15);
     }
@@ -112,7 +112,7 @@ public class IssueBook {
 
     //Book in High Demand is issued for 3 days
     @Test
-    public void testHighDeman(){
+    public void IssueBooke_Equals_HighDemand(){
         newBook.setDemand(1);
         lc.issueBook(newBook, todaysDate);
         assertEquals(newBook.days(), 3);

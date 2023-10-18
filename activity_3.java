@@ -16,7 +16,7 @@ public class Department {
     
     private ArrayList<String> IDArray = new ArrayList<String>();
     
-    private ArrayList<String> temp1 = new ArrayList<String>();
+    //private ArrayList<String> temp1 = new ArrayList<String>();
 
 
     //Correction. Primitives do no go into an Array List
@@ -86,8 +86,9 @@ public class Department {
     }
 
     
-
+    //temporary array list was being cached within the class, as opposed to being cached within the function
     public void assignNew(string temp2, int ID) {
+        ArrayList<String> temp1 = new ArrayList<String>();
         temp1.add(temp2);
 	    IDArray.add(ID);
     }
