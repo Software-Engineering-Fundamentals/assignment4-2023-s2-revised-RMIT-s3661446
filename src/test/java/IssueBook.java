@@ -49,7 +49,7 @@ public class IssueBook {
 
 
 
-    //The book is issue twice. Should throw error
+    //Tests if the same book can be issued twice. Should throw error
     @Test
     public void issueBook_Equals_BookAlreadyOnTheAccount(){
         lc.issueBook(newBook, todaysDate);
@@ -58,7 +58,7 @@ public class IssueBook {
         assertEquals("Book already loaned out", errorMessage.toString());
     }
 	
-    //Adds 4 dummy books. Should return false
+    //Adds 4 dummy books. Tests if book can be borrowed with the multiple books. Should return false
     @Test
     public void issueBook_False_ManyBooksBorrowed(){
         lc.issueBook(new Book(2, "New Book", 0), todaysDate);
@@ -71,7 +71,7 @@ public class IssueBook {
     }
 
     
-//Sets the date to be 1 year after expiry/ Should return false
+    //Sets the date to be 1 year after expiry. Tests whether the book is issued with expired card. Should return false
     @Test
     public void issueBook_False_CardExpired(){
         todaysDate = new Date(2025, 10, 10);
@@ -79,14 +79,14 @@ public class IssueBook {
     }
 
 
-    //Sets book as not available. Should return false
+    //Sets book as not available. Tests if the unavailable book can be issued. Should return false
     @Test 
     public void IssueBook_False_BookNotAvailable(){
         newBook.setDemand(false);
         assertFalse(lc.issueBook(newBook, todaysDate));
     }
 
-    //Issues a fine. Should return false
+    //Issues a fine. Tests if the book is issued with outstanding fine. Should return false
     @Test
     public void IssueBook_False_StudentHasFine(){
         lc.setFine(10);
@@ -94,7 +94,7 @@ public class IssueBook {
     }
 
 
-    //Tests that the book is updated
+    //Tests if the book is updated after being issued. Should return false
     @Test
     public void Book_False_SuccessfullyBorrowed(){
         lc.issueBook(newBook, todaysDate);
@@ -102,7 +102,7 @@ public class IssueBook {
     }
 
 
-    //Book in low deman is issued for 15 days.
+    //Tests if book in low demand is issued for 15 days. Should be equal to 15
     @Test
     public void IssueBook_Equals_LowDemand(){
         lc.issueBook(newBook, todaysDate);
@@ -110,7 +110,7 @@ public class IssueBook {
     }
 
 
-    //Book in High Demand is issued for 3 days
+    //Tests if the book in High Demand is issued for 3 days. Should be equal to 3
     @Test
     public void IssueBooke_Equals_HighDemand(){
         newBook.setDemand(1);
